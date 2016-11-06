@@ -3,6 +3,7 @@ require 'sequel'
 require 'sqlite3'
 require 'mysql2'
 require 'yaml'
+require 'hash_dot'
 
 # берём файл конфигураций
 @config = YAML.load_file('config.yml').to_dot
@@ -16,18 +17,21 @@ DB = Sequel.connect(
     :password => @config.db_password)
 
 # создаём таблицы
-# create_table! удаляет таблицу, если она уже есть
-DB.create_table! :cities do
+# drop_table? удаляет таблицу, если она уже есть
+DB.drop_table? :students
+DB.drop_table? :cities
+
+DB.create_table :cities do
     primary_key :city_id
-    string :city_name :null=>false
-    string :city_country :null=>false
+    String :city_name, :null=>false
+    String :city_country, :null=>false
 end
 
-DB.create_table! :students do
+DB.create_table :students do
     primary_key :student_id
-    string :name :null=>false
-    string :surname :null=>false
-    TrueClass :is_male :null=>false
+    String :name, :null=>false
+    String :surname, :null=>false
+    TrueClass :is_male, :null=>false
     foreign_key :city_id, :cities, :null=>false
 end
 
