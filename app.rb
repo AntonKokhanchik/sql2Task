@@ -27,6 +27,6 @@ DB.create_table! :students do
     primary_key :student_id
     string :name :null=>false
     string :surname :null=>false
-    string :gender :null=>false
+    TrueClass :is_male :null=>false
     foreign_key :city_id, :cities, :null=>false
 end
