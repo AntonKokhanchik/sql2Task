@@ -31,6 +31,7 @@ DB.create_table :students do
     primary_key :student_id
     String :name, :null=>false
     String :surname, :null=>false
+    Integer :course, :null=>false
     TrueClass :is_male, :null=>false
     foreign_key :city_id, :cities, :null=>false
 end
