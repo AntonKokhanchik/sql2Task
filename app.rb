@@ -1,6 +1,6 @@
-require 'faker'
+# require 'faker'
 require 'sequel'
-require 'sqlite3'
+# require 'sqlite3'
 require 'mysql2'
 require 'yaml'
 require 'hash_dot'
@@ -56,3 +56,4 @@ DB[:students].import([:name,:surname, :course, :is_male, :city_id], [
     ['Alisa', 'Kepler', 4, false, 1],
     ['Anna', 'Madavie', 2, false, 7]
     ])
+# FIXME: syntax error, unexpected ',', expecting ')' in 40 line
