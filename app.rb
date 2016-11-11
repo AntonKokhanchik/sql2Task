@@ -61,3 +61,26 @@ students.import(
     ['Hanz', 'Mueller', 4, true, 6],
     ['Alisa', 'Kepler', 4, false, 1],
     ['Anna', 'Madavie', 2, false, 7] ] )
+
+# 1) вывести количество студентов
+temp = students.count(:name)
+puts "Всего #{temp} студентов\n\n"
+
+# 2) сколько студенток-девочек приехало учиться и на
+# каких они курсах
+temp = students.where(:is_male=>false)
+puts "Девушки:"
+temp.all do |girl|
+  puts "#{girl[:name]} #{girl[:surname]}, #{girl[:course]} курс"
+end
+puts "Всего: #{temp.count(:name)}\n\n"
+
+# 3) сколько студентов приехало учиться из Германии
+temp = cities.where(:city_country=>'Germany').select(:city_id)
+temp = students.where(:city_id=>temp)
+puts "Студентов из Германии: #{temp.count(:name)}\n\n"
+
+# 4) сколько студентов младше четвертого курса
+# у нас обучаются (не включая сам 4 курс)
+temp = students.where{course < 4}
+puts "Студентов младше 4 курса: #{temp.count(:name)}"
