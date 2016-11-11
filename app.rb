@@ -89,3 +89,19 @@ puts "Студентов младше 4 курса: #{temp.count(:name)}"
 #  Питера за неуспеваемость на второй курс
 students.where(:name=>'Anna').update(:course=>3)
 students.where(:name=>'Peter').update(:course=>2)
+
+# 6) необходимо удалить записи обо всех
+# студентках-девушках из Германии, т.к. им не
+# дали разрешение на обучение у нас
+temp = cities.where(:city_country=>'Germany').select(:city_id)
+students.where(Sequel.&(:is_male=>false, :city_id=>temp)).delete
+
+# 7) всем студентам необходимо добавить данные
+# об отметке об успешном освоении нашего курса,
+# по-умолчанию у всех курс не освоен, кроме студентов
+# 4-го курса из Германии
+DB.alter_table :students do
+  add_column :course_done, TrueClass, :default=>false
+end
+temp = cities.where(:city_country=>'Germany').select(:city_id)
+students.where(Sequel.&(:course=>4, :city_id=>temp)).update(:course_done=>true)
