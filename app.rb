@@ -38,6 +38,8 @@ end
 
 DB[:cities].import ([:city_name, :city_country], [
     ['Erfurt','Germany'],
+students = DB[:students]
+cities = DB[:cities]
     ['San-Francisco', 'USA'],
     ['Capetown', 'South Africa'],
     ['Beijing(Pekin)', 'China'],
