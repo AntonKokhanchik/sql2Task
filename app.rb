@@ -84,3 +84,8 @@ puts "Студентов из Германии: #{temp.count(:name)}\n\n"
 # у нас обучаются (не включая сам 4 курс)
 temp = students.where{course < 4}
 puts "Студентов младше 4 курса: #{temp.count(:name)}"
+
+# 5) необходимо перевести Анну со 2 на 3 курс, а
+#  Питера за неуспеваемость на второй курс
+students.where(:name=>'Anna').update(:course=>3)
+students.where(:name=>'Peter').update(:course=>2)
